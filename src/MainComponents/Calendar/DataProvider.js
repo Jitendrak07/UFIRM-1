@@ -8,35 +8,35 @@ class DataProvider {
             case 'C':
                 url = `Calendar/Category/Save`;
                 return srv.CallPostService(url, model[0]);
-                break;
-            case 'U':
-                url = `Calendar/Category/Save`;
-                return srv.CallPostService(url, model[0]);
-                break;
+                
+            // case 'U':
+            //     url = `Calendar/Category/Save`;
+            //     return srv.CallPostService(url, model[0]);
+            //     break;
             case 'D':
                 url = `Calendar/Category/Delete/${model[0].CatId}/${model[0].CmdType}`;
                 return srv.CallPostService(url);
-                break;
+               
             case 'R':
                 url = `Calendar/Category/List/${model[0].CmdType}`;
                 return srv.get(url);
-                break;
+              
             default:
         }
     }
 
-    manageSubCategory(model, type,categoryId) {
+    manageSubCategory(model,type,categoryId) {
         // 
         let url = '';
         switch (type) {
             case 'C':
                 url = `CreateSubCategory`;
                 return srv.CallPostNewService(url, model[0]);
-                break;
+                
             case 'R':
                 url = `GetCategory?categoryId=${categoryId}`;
                 return srv.getComplaint(url);
-                break;
+              
             default:
         }
     }
@@ -47,31 +47,31 @@ class DataProvider {
             case 'C':
                 url = `CreateTask`;
                 return srv.CallPostNewService(url, model[0]);
-                break;
+              
             case 'U':
                 url = `Calendar/Category/Save`;
                 return srv.CallPostService(url, model[0]);
-                break;
+                
             case 'D':
                 url = `DeleteTask?taskID=${model[0].TaskId}`;
                 return srv.CallDeleteNewService(url,model[0]);
-                break;
+                
             case 'R':
                 url = `TaskDetails?catID=${model[0].CategoryId}&subCatID=${model[0].SubCategoryId}&assingedtoID=${model[0].AssignedTo}&occurrence=${model[0].Occurrence}&dteFr=${model[0].DteFr}&dteTo=${model[0].DteTo}&taskstatus=${model[0].TaskStatus}&propID=${model[0].PropertyId}&taskPriorityId=${model[0].TaskPriority}`;
                 return srv.getComplaint(url);
-                break;
+             
             case 'SR':
                 url = `TaskDetailsWithQuestion?catID=${model[0].CategoryId}&subCatID=${model[0].SubCategoryId}&assingedtoID=${model[0].AssignedTo}&occurrence=${model[0].Occurrence}&dteFr=${model[0].DteFr}&dteTo=${model[0].DteTo}`;
                 return srv.getComplaint(url);
-                break;
+              
                 case 'T':
                 url = `TaskDetails?catID=${model[0].CategoryId}&subCatID=${model[0].SubCategoryId}&assingedtoID=${model[0].AssignedTo}&occurrence=${model[0].Occurrence}`;
                 return srv.getComplaint(url);
-                break;
+                
             case 'TaskWithQuestionName':
                     url = `TaskDetailsWithQuestion?catID=${model[0].CategoryId}&subCatID=${model[0].SubCategoryId}&assingedtoID=${model[0].AssignedTo}&occurrence=${model[0].Occurrence}`;
                     return srv.getComplaint(url);
-                    break;
+                   
             case 'GetAllTaskWiseSummary':
                 // url = `GetAllTaskWiseSummary?categoryId=${model[0].CategoryId}&subCategoryId=${model[0].SubCategoryId}&occurrence=${model[0].Occurrence}&dateFrom=${model[0].DteFr}&dateTo=${model[0].DteTo}&status=${model[0].TaskStatus}&priorityId=${model[0].TaskPriority}`;
                 let url = 'GetAllTaskWiseSummary?';
@@ -87,7 +87,7 @@ class DataProvider {
                     url = url.slice(0, -1);
                 }
                 return srv.getComplaint(url);
-                break;
+              
             case 'GetAllTaskWiseStatusFinalDash':
                 url = `GetAllTaskWiseStatusFinalDash?categoryId=${model[0].catId}&occurance=${model[0].occurance}&dateFrom=${model[0].dateFrom}&dateTo=${model[0].dateTo}&propId=${model[0].propId}`
                 return srv.getComplaint(url);
@@ -101,7 +101,7 @@ class DataProvider {
             case 'R':
                 url = `AssetTracking?assetId=${model[0].AssetId}&dteFr=${model[0].DteFr}&dteTo=${model[0].DteTo}`;
                 return srv.getComplaint(url);
-                break;
+               
             default:
         }
     }
@@ -113,11 +113,11 @@ class DataProvider {
             case 'R':
                 url = `GetAllEmployeeAttendanceSummary?date=${model[0].Date}`;
                 return srv.getComplaint(url);
-                break;
+               
             case 'D':
                 url = `DeleteEmployeeAttendanceSummary?id=${model[0].Id}`;
                 return srv.CallDeleteNewService(url,model[0]);
-                break;
+               
             default:
         }
     }
@@ -128,7 +128,7 @@ class DataProvider {
         case 'R':
             let url = `Facility/FacilityMember`;
             return srv.CallPostService(url, model[0]);
-            break;
+           
         }
     }
 
@@ -139,11 +139,11 @@ class DataProvider {
             case 'R':
                 url = `EventTaskBooking`;
                 return srv.getComplaint(url);
-                break;
+               
                 case 'Approve':
                 url = `ApproveEventTaskBooking?BookingId=${model[0].BookingId}`;
                 return srv.CallPostNewService(url);
-                break;
+               
             default:
         }
     }
@@ -155,7 +155,7 @@ class DataProvider {
             case 'R':
                 url = `TaskDetailsEvent`;
                 return srv.getComplaint(url);
-                break;
+               
             default:
         }
     }
@@ -167,7 +167,7 @@ class DataProvider {
             case 'R':
                 url = `GetAssets`;
                 return srv.getComplaint(url);
-                break;
+              
             default:
         }
     }
@@ -179,7 +179,7 @@ class DataProvider {
             case 'R':
                 url = `AssignToList?propertyId=${model[0].PropertyId}`;
                 return srv.getComplaint(url);
-                break;
+                
             default:
         }
     }
@@ -191,7 +191,7 @@ class DataProvider {
             case 'R':
                 url = `DashboardAssignToList?propertyId=${model[0].PropertyId}`;
                 return srv.getComplaint(url);
-                break;
+                
             default:
         }
     }
@@ -202,7 +202,7 @@ class DataProvider {
             case 'R':
                 url = `GetAllTaskPriorities`;
                 return srv.getComplaint(url);
-                break;
+                
             default:
         }
     }
@@ -214,7 +214,7 @@ class DataProvider {
             case 'R':
                 url = `GetAllProperties`;
                 return srv.getComplaint(url);
-                break;
+               
             default:
         }
     }
@@ -227,27 +227,27 @@ class DataProvider {
             case 'C':
                 url = `/CreateQuestionnaire`;
                 return srv.CallPostNewService(url, model[0]);
-                break;
+              
             case 'U':
                 url = `/UpdateQuestionnaire`;
                 return srv.CallPostNewService(url, model[0]);
-                break;
+               
             case 'D':
                 url = `DeleteQuestionnaire?questID=${model[0].Id}`;
                 return srv.CallDeleteNewService(url,model[0]);
-                break;
+              
             case 'R':
                 url=`QuestionsDetailsOfTask?taskID=${model[0].Id}&TransactionDate=${model[0].date}`;
                 return srv.getComplaint(url);
-                break;
+                
             case 'AB': //Amenites Bookings
                 url=`AmenitiesBookings?PropertyID=${model[0].PropertyId}&UserID=${model[0].UserId}&DateFr=${model[0].DateFrom}&DateTo=${model[0].DateTo}`;
                 return srv.getComplaint(url);
-                break;
+                
             case 'ABA': //Amenites Bookings Approve
                 url=`AmenitiesBookingApprove?Id=${model[0].Id}`;
                 return srv.getComplaint(url);
-                break;
+                
             default:
         }
     }
@@ -273,7 +273,7 @@ class DataProvider {
             case 'R':
                 url = `GetTaskQuestionImage?TaskId=${model[0].TaskId}&QuestId=${model[0].QuestId}&UpdatedOn=${model[0].UpdatedOn}`;
                 return srv.getComplaint(url, model[0]);
-                break;
+               
             default:
         }
     }
@@ -289,56 +289,56 @@ class DataProvider {
             case 'C':
                 url = `Calendar/Event/Save`;
                 return srv.CallPostService(url, model[0]);
-                break;
+              
             case 'U':
                 url = `Calendar/Event/Save`;
                 return srv.CallPostService(url, model[0]);
-                break;
+               
             case 'D':
                 url = `Calendar/Event/Approval/Save`;
                 //  url = `Calendar/Event/Delete/${model[0].id}/${model[0].cmdType}`;
                 return srv.CallPostService(url, model[0]);
-                break;
+               
             case 'E': // event list
                 url = `Calendar/Event/List/${model[0].CmdType}/${model[0].PropertyId}/${model[0].EventType}/${model[0].Categories}/${model[0].Assignees}/${model[0].EventStatus}`;
                 return srv.get(url);
-                break;
+               
             case 'DT': // event details
                 url = `Calendar/Event/Details/${model[0].CmdType}/${model[0].PropertyId}/${model[0].EventId}/${model[0].SubEventId}`;
                 return srv.get(url);
-                break;
+             
             case 'EATT': // event attachment
                 url = `Calendar/Event/Attachment/${model[0].cmdType}/${model[0].id}`;
                 return srv.get(url);
-                break;
+           
             case 'EST': // event SubTask
                 url = `Calendar/Event/SubTask/${model[0].cmdType}/${model[0].SubEventId}`;
                 return srv.get(url);
-                break;
+               
             case 'UST':
                 url = `Calendar/Event/Subtask/Complete/${model[0].id}/${model[0].cmdType}/${model[0].isCompleted}`;
                 return srv.CallPostService(url);
-                break;
+               
             case 'DST':
                 url = `Calendar/Event/Subtask/Delete/${model[0].id}/${model[0].cmdType}`;
                 return srv.CallPostService(url);
-                break;
+               
             case 'ELog': // event logs
                 url = `Calendar/Event/Logs/${model[0].cmdType}/${model[0].EventId}/${model[0].SubEventId}`;
                 return srv.get(url);
-                break;
+               
             case 'EComments': // get event comments 
                 url = `Calendar/Event/Comments/${model[0].cmdType}/${model[0].SubEventId}/${model[0].EventId}`;
                 return srv.get(url);
-                break;
+             
             case 'CComment':
                 url = `Calendar/Event/Comment/Save`;
                 return srv.CallPostService(url, model[0]);
-                break;
+                
             case 'CEVT': // mark as complete event 
                 url = `Calendar/Event/Complete`;
                 return srv.CallPostService(url, model[0]);
-                break;
+                
             default:
         }
     }
@@ -364,11 +364,11 @@ class DataProvider {
             case 'R': // get event approval list 
                 url = `Calendar/Event/Approval/List/${model[0].cmdType}/${model[0].PropertyId}/${model[0].FilterType}/${model[0].PageSize}/${model[0].PageNumber}/${model[0].SearchValue}`;
                 return srv.get(url);
-                break;
+              
             case 'U': // update approval state and made changes according event and sub event table
                 url = `Calendar/Event/Approval/Response/Save`;
                 return srv.CallPostService(url, model[0]);
-                break;
+                
             default:
         }
     }
@@ -380,15 +380,15 @@ class DataProvider {
             case 'U':
                 url = `Calendar/Category/Save`;
                 return srv.CallPostService(url, model[0]);
-                break;
+                
             case 'D':
                 url = `Calendar/Category/Delete/${model[0].CatId}/${model[0].CmdType}`;
                 return srv.CallPostService(url);
-                break;
+               
             case 'R':
                 url = `KycDetailsList/${model[0].CmdType}`;
                 return srv.get(url);
-                break;
+                
             default:
         }
     }

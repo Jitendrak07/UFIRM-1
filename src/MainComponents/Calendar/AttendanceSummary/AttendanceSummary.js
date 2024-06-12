@@ -150,7 +150,7 @@ class AttendanceSummary extends Component {
 
   manageEmployee = (model, type) => {
     this.ApiProvider.manageEmployee(model, type).then((resp) => {
-      if (resp.ok && resp.status == 200) {
+      if (resp.ok && resp.status === 200) {
         return resp.json().then((rData) => {
           let empData = [];
           rData.facilityMember.forEach((element) => {
@@ -173,7 +173,7 @@ class AttendanceSummary extends Component {
 
   manageFacilityMember = (model, type) => {
     this.ApiProvider.manageFacility(model, type).then((resp) => {
-      if (resp.ok && resp.status == 200) {
+      if (resp.ok && resp.status === 200) {
         return resp.json().then((rData) => {
           let FacilityData = [];
           rData.forEach((element) => {
@@ -195,7 +195,7 @@ class AttendanceSummary extends Component {
 
   manageAttendanceData = (model, type) => {
     this.ApiProvider.manageAttendanceData(model, type).then((resp) => {
-      if (resp.ok && resp.status == 200) {
+      if (resp.ok && resp.status === 200) {
         return resp.json().then((rData) => {
           switch (type) {
             case "R":
@@ -247,7 +247,7 @@ class AttendanceSummary extends Component {
 
   findItem(id) {
     return this.state.data.find((item) => {
-      if (item.TaskId == id) {
+      if (item.TaskId === id) {
         return item;
       }
     });

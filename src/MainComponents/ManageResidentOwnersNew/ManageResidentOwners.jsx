@@ -367,7 +367,7 @@ class ManageResidentOwners extends React.Component {
 
     findItem(id) {
         return this.state.gridPropertyMemberData.find((item) => {
-            if (item.flatId == id) {
+            if (item.flatId === id) {
                 return item;
             }
         });

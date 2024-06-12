@@ -85,12 +85,6 @@ export default class TaskList extends Component {
           Header: "Remarks",
           accessor:"Remarks"
         },
-        // {
-        //   Header: "Assigned To",
-        // },
-        // {
-        //   Header: "Assigned By",
-        // },
         {
           Header: "Action",
           Cell: (data) => {

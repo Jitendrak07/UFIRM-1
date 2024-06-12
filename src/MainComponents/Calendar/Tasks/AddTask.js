@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { setHours, setMinutes } from "date-fns";
 import Modal from "react-awesome-modal";
 import moment from "moment";
-import { th } from "date-fns/locale";
+// import { th } from "date-fns/locale";
 import ApiProvider from "../DataProvider";
 import Button from "../../../ReactComponents/Button/Button";
 import * as appCommon from "../../../Common/AppCommon.js";
@@ -120,7 +120,8 @@ export default class AddTask extends Component {
 
   manageSubCategory = (model, type, categoryId) => {
     this.ApiProvider.manageSubCategory(model, type, categoryId).then((resp) => {
-      if (resp.ok && resp.status == 200) {
+      if (resp.ok && resp.status === 200) {
+
         return resp.json().then((rData) => {
           let subCatData = [];
           rData.forEach((element) => {
@@ -143,7 +144,7 @@ export default class AddTask extends Component {
 
   manageTask = (model, type) => {
     this.ApiProvider.manageTask(model, type).then((resp) => {
-      if (resp.ok && resp.status == 200) {
+      if (resp.ok && resp.status === 200) {
         return resp.json().then((rData) => {
           switch (type) {
             case "C":
@@ -175,7 +176,7 @@ export default class AddTask extends Component {
 
   manageAssets = (model, type) => {
     this.ApiProvider.manageAssets(model, type).then((resp) => {
-      if (resp.ok && resp.status == 200) {
+      if (resp.ok && resp.status === 200) {
         return resp.json().then((rData) => {
           let assetsData = [];
           rData.forEach((element) => {
@@ -197,7 +198,7 @@ export default class AddTask extends Component {
 
   manageAssign = (model, type) => {
     this.ApiProvider.manageAssign(model, type).then((resp) => {
-      if (resp.ok && resp.status == 200) {
+      if (resp.ok && resp.status === 200) {
         return resp.json().then((rData) => {
           let assignData = [];
           rData.forEach((element) => {
@@ -219,7 +220,7 @@ export default class AddTask extends Component {
 
   manageProperties = (model, type) => {
     this.ApiProvider.manageProperties(model, type).then((resp) => {
-      if (resp.ok && resp.status == 200) {
+      if (resp.ok && resp.status === 200) {
         return resp.json().then((rData) => {
           let propertyData = [];
           rData.forEach((element) => {

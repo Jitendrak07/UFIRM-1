@@ -6,20 +6,19 @@ class DataProvider {
         switch (type) {
             case 'I':
                 url = `ManageAssets`;
-                return srv.CallPostNewService(url, model[0]);
-                break;
+                return srv.CallPostNewService(url, model[0]);               
             case 'U':
                 url = `ManageAssets`;
                 return srv.CallPostNewService(url, model[0]);
-                break;
+                
             case 'D':
                 url = `ManageAssets`;
                 return srv.CallPostNewService(url, model[0]);
-                break;
+                
             case 'R':
                 url = `GetAssets`;
                 return srv.CallGetNewService(url);   
-                break;       
+                   
             default:
         }
     }   

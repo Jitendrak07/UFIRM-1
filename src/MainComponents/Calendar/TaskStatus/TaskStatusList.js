@@ -4,7 +4,7 @@ import LoadingOverlay from "react-loading-overlay";
 import { PropagateLoader } from "react-spinners";
 import Button from "../../../ReactComponents/Button/Button";
 import DataTable from "../../../ReactComponents/ReactTable/DataTable";
-import DropdownList from "../../../ReactComponents/SelectBox/DropdownList";
+// import DropdownList from "../../../ReactComponents/SelectBox/DropdownList";
 import MultiSelectDropdown from "../../KanbanBoard/MultiSelectDropdown";
 import ApiProvider from "../DataProvider";
 // import AddTask from "./AddTask";
@@ -14,7 +14,7 @@ import * as appCommon from "../../../Common/AppCommon.js";
 import swal from "sweetalert";
 import { DELETE_CONFIRMATION_MSG } from "../../../Contants/Common";
 // import EditTask from "./EditTask";
-
+   
 const $ = window.$;
 
 export default class TaskStatusList extends Component {
@@ -194,7 +194,7 @@ export default class TaskStatusList extends Component {
 
   manageCategory = (model, type) => {
     this.ApiProvider.manageCategory(model, type).then((resp) => {
-      if (resp.ok && resp.status == 200) {
+      if (resp.ok && resp.status === 200) {
         return resp.json().then((rData) => {
           let catData = [];
           rData.forEach((element) => {
@@ -216,7 +216,7 @@ export default class TaskStatusList extends Component {
 
   manageTask = (model, type) => {
     this.ApiProvider.manageTask(model, type).then((resp) => {
-      if (resp.ok && resp.status == 200) {
+      if (resp.ok && resp.status === 200) {
         return resp.json().then((rData) => {
           switch (type) {
             // case "R":
@@ -302,22 +302,22 @@ export default class TaskStatusList extends Component {
   };
 
   modifyOccurence = (Occurrence)=>{
-    if(Occurrence == 'W'){
+    if(Occurrence === 'W'){
       return 'Weekly'
     }
-    if(Occurrence == 'Y'){
+    if(Occurrence === 'Y'){
       return 'Yearly'
     }
-    if(Occurrence == 'D'){
+    if(Occurrence === 'D'){
       return 'Daily'
     }
-    if(Occurrence == 'M'){
+    if(Occurrence === 'M'){
       return 'Monthly'
     }
   }
   manageSubCategory = (model, type, categoryId) => {
     this.ApiProvider.manageSubCategory(model, type, categoryId).then((resp) => {
-      if (resp.ok && resp.status == 200) {
+      if (resp.ok && resp.status === 200) {
         return resp.json().then((rData) => {
           let subCatData = [];
           rData.forEach((element) => {
@@ -340,7 +340,7 @@ export default class TaskStatusList extends Component {
 
   manageAssign = (model, type) => {
     this.ApiProvider.manageAssign(model, type).then((resp) => {
-      if (resp.ok && resp.status == 200) {
+      if (resp.ok && resp.status === 200) {
         return resp.json().then((rData) => {
           let assignData = [];
           rData.forEach((element) => {
@@ -420,7 +420,7 @@ export default class TaskStatusList extends Component {
 
   findItem(id) {
     return this.state.data.find((item) => {
-      if (item.TaskId == id) {
+      if (item.TaskId === id) {
         return item;
       }
     });

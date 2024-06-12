@@ -97,13 +97,13 @@ export const MyCard = props => {
                     <span className="badge badge-light"><i className="fa fa-paperclip"> &nbsp; {props.attachmentCnt}</i></span>
                     <span className="badge badge-light"><i className="fa fa-comments">  &nbsp; {props.commentCnt}</i></span>
                     &nbsp;
-                    <img
+                    {/* <img
                         title={props.username}
                         src={props.profileImageUrl}
                         width="30px"
                         height="30px"
                         className="img-circle"
-                    />
+                    /> */}
                 </div>
             </div>
         </div>

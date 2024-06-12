@@ -8,7 +8,7 @@ import Button from '../../ReactComponents/Button/Button';
 import DataGrid from '../../ReactComponents/DataGrid/DataGrid.jsx';
 import ApiProvider from './DataProvider';
 import CommonDataProvider from '../../Common/DataProvider/CommonDataProvider.js';
-import SelectBox from '../../ReactComponents/SelectBox/Selectbox.jsx';
+// import SelectBox from '../../ReactComponents/SelectBox/Selectbox.jsx';
 
 import departmentAction from '../../redux/department/action';
 
@@ -103,7 +103,7 @@ class OwnerResidentsGrid extends Component {
 
     findItem(id) {
         return this.state.gridOwnerData.find((item) => {
-            if (item.propertyMemberId == id) {
+            if (item.propertyMemberId === id) {
                 return item;
             }
         });
@@ -218,7 +218,7 @@ class OwnerResidentsGrid extends Component {
                                         </li> */}
                                         {
                                             this.state.isActiveInactiveClass === 1 && this.props.residentTypeId === 1
-                                                && this.state.gridData.length == 0 ?
+                                                && this.state.gridData.length === 0 ?
                                                 <li className="nav-item">
                                                     <Button id="btnAddOwner"
                                                         Action={this.enableAddOwnerTenant.bind(this, "AddOwner")}

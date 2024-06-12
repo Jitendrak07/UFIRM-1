@@ -3,7 +3,7 @@ import DataGrid from "../../ReactComponents/DataGrid/DataGrid.jsx";
 import Button from "../../ReactComponents/Button/Button";
 import ApiProvider from "./DataProvider.js";
 import InputBox from "../../ReactComponents/InputBox/InputBox.jsx";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import * as appCommon from "../../Common/AppCommon.js";
 import { DELETE_CONFIRMATION_MSG } from "../../Contants/Common";
 import swal from "sweetalert";
@@ -14,6 +14,7 @@ import { ShowImageModal } from "../KanbanBoard/ImageModal.js";
 
 const $ = window.$;
 const toBase64 = file => new Promise((resolve, reject) => {
+  // console.log(AssetsMaster)
   const reader = new FileReader();
   reader.readAsDataURL(file);
   reader.onload = () => resolve(reader.result.split(','));
@@ -75,6 +76,7 @@ class AssetsMaster extends Component {
         Description: this.state.Description,
         QRCode: this.state.QRCode,
         AssetType: this.state.AssetType,
+        AssetCategory:this.state.AssetCategory,
         Manufacturer : this.state.ManufacturerName,
         Category : this.state.SelectedCategory,
         SubCategory : this.state.SelectedSubCategory,
@@ -111,10 +113,10 @@ class AssetsMaster extends Component {
       CreateValidator();
     });
   };
-  findItem(id) {
-    //
+  findItem(Id) {
+    
     return this.state.GridData.find((item) => {
-      if (item.Id == id) {
+      if (item.sNo == Id) {
         return item;
       }
     });
@@ -132,12 +134,15 @@ class AssetsMaster extends Component {
     this.setState({ PageMode: "Edit" }, () => {
       CreateValidator();
       var rowData = this.findItem(Id);
-      this.setState({ Id: rowData.Id });
-      this.setState({ Name: rowData.Name });
-      this.setState({ Description: rowData.Description });
-      this.setState({ QRCode: rowData.QRCode });
+      this.setState({
+        Id: rowData.Id,
+        Name: rowData.Name,
+        Description: rowData.Description,
+        QRCode: rowData.QRCode
+      });
     });
   };
+  
 
   onGridDelete = (Id) => {
     var rowData = this.findBySno(Id);
@@ -174,11 +179,18 @@ class AssetsMaster extends Component {
     this.setState({ PageMode: "View" }, () => {
     var rowData = this.findBySno(Id);
     this.setState({
-      showImagefilename: rowData.Name,
-      showImagefiletype: rowData.ImageExt,
-      showImagefile: rowData.Image,
-      extension: rowData.ImageExt
-    })})
+      Id: rowData.Id,
+      Name: rowData.Name,
+      Description: rowData.Description,
+      QRCode: rowData.QRCode
+    });
+    // this.setState({           
+    //   showImagefilename: rowData.Name,
+    //   showImagefiletype: rowData.ImageExt,
+    //   showImagefile: rowData.Image,
+    //   extension: rowData.ImageExt
+    // })
+  })
   };
 
     // Document change
@@ -395,7 +407,7 @@ class AssetsMaster extends Component {
                     </div>
                   </div>
                   <div className="row">
-                    <div className="col-sm-4">
+                    <div className="col-sm-3">
                       <div className="form-group">
                       <label htmlFor="manufacturer">Manufacturer</label>
                           <input type="text" id="manufacturer" placeholder="Manufacturer" 
@@ -404,12 +416,21 @@ class AssetsMaster extends Component {
                           />
                       </div>
                     </div>
-                    <div className="col-sm-4">
+                    <div className="col-sm-3">
                       <div className="form-group">
                       <label for="txtQRCodeL">Asset Name</label>
                       <input type="text" id="manufacturer" placeholder="Asset Name" 
                           className="form-control"
                           onChange={(e) =>this.setState({SelectedAssetName: e.target.value})}
+                          />
+                      </div>
+                    </div>
+                    <div className="col-sm-3">
+                      <div className="form-group">
+                      <label for="txtQRCodeL">Asset Category</label>
+                      <input type="text" id="manufacturer" placeholder="Asset Category" 
+                          className="form-control"
+                          onChange={(e) =>this.setState({SelectedAssetCategory: e.target.value})}
                           />
                       </div>
                     </div>
@@ -433,18 +454,10 @@ class AssetsMaster extends Component {
                           />
                       </div>
                     </div> */}
-                    {/* <div className="col-sm-4">
-                      <div className="form-group">
-                      <label for="txtQRCodeL">Asset Name</label>
-                      <input type="text" id="manufacturer" placeholder="Asset Name" 
-                          className="form-control"
-                          onChange={(e) =>this.setState({SelectedAssetName: e.target.value})}
-                          />
-                      </div>
-                    </div> */}
+                    
                   </div>
                   <div className="row">
-                    <div className="col-sm-4">
+                    <div className="col-sm-3">
                       <div className="form-group">
                       <label for="txtQRCodeL">Asset Model</label>
                       <input type="text" id="manufacturer" placeholder="Asset Name" 
@@ -453,7 +466,8 @@ class AssetsMaster extends Component {
                           />
                       </div>
                     </div>
-                    <div className="col-sm-4">
+                    
+                    <div className="col-sm-3">
                       <div className="form-group">
                       <label for="txtDescriptionL">Is Movable</label>
                       <select
@@ -465,16 +479,13 @@ class AssetsMaster extends Component {
                             })
                           }
                       >
-                        <option value={0}>Is Movable</option>
+                        <option value={0}>Select</option>
                         <option value={true}>Yes</option>
                         <option value={false}>No</option>
                       </select>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="row">
-                  <div className="col-sm-4">
+                    <div className="col-sm-3">
                       <div className="form-group">
                         <label for="txtDescriptionL">Description</label>
                                                    <textarea
@@ -486,11 +497,13 @@ class AssetsMaster extends Component {
                           }
                           PlaceHolder="Description"
                           className="form-control form-control-sm"
-                        rows="4"
+                        rows="2"
                                     />
                       </div>
                     </div>
-                    <div className="col-sm-4">
+                  </div>
+                  <div className="row">                  
+                  <div className="col-sm-3">
                       <div className="form-group">
                         <label for="txtQRCodeL">QRCode</label>
                         <input type="text" id="manufacturer" placeholder="QR Code" 
@@ -499,9 +512,7 @@ class AssetsMaster extends Component {
                           />
                     </div>
                   </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-2">
+                  <div className="col-sm-2">
                       <label>File Upload</label>
                       <DocumentUploader
                         Class={"form-control"}
@@ -512,6 +523,9 @@ class AssetsMaster extends Component {
                       />
                     </div>
                   </div>
+                  {/*<div className="row">*/ }
+                   
+                {/* </div> */}
                 </div>
 
                 <div className="modal-footer">
@@ -549,21 +563,24 @@ class AssetsMaster extends Component {
             <div>
               <div className="modal-content">
                 <div className="modal-body">
-                  <h3>Assets Images</h3>
+                  <h5>Asset View</h5>
                 <div className="row">
                   <div className="col-sm-6">
                       <div className="form-group">
                         {/* <img src={this.state.showImagefile} alt="Image" width="100" height="100" /> */}
-                        <img src={`data:image/jpeg;base64,${this.state.showImagefile}`} style={{"height":"400px","width":"400px"}} />
+                        
+                        {/* <img src={`data:image/jpeg;base64,${this.state.showImagefile}`} style={{"height":"40px","width":"40px"}} /> */}
+                           
                       </div>
                     </div>
                   </div>
+                  
                 </div>
 
                 <div className="modal-footer">
                   <Button
                     Id="btnCancel"
-                    Text="Close"
+                    Text="Cancel"
                     Action={this.handleCancel}
                     ClassName="btn btn-secondary"
                   />

@@ -6,16 +6,13 @@ class DataProvider {
         switch (type) {
             case 'OC':
                 url = `Property/Owner/Save`
-                return srv.CallPostService(url, model[0]);
-                break;
+                return srv.CallPostService(url, model[0]);                
             case 'I':
                 url = `Property/ViewPersonalInformation/Save`
-                return srv.CallPostService(url, model[0]);
-                break;
+                return srv.CallPostService(url, model[0]);               
             case 'V':
                 url = `Property/ViewPersonalInformation/Save`
-                return srv.CallPostService(url, model[0]);
-                break;
+                return srv.CallPostService(url, model[0]);                
             default:
         }
     }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 class SelectBoxComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -58,7 +57,7 @@ class SelectBox2 extends React.Component {
         name={this.props.Name}
         value={this.props.Value}
         onChange={this.onChange.bind(this)}
-        id={this.props.ID}
+        // id={this.props.ID}
         className={this.props.ClassName}
         disabled={this.props.disabled}
       >

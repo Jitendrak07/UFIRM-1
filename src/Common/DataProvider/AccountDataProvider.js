@@ -7,4 +7,4 @@ class   AccountDataProvider {
             return new ServiceProvider().get(url);
     }
 }
-export default AccountDataProvider ;
+export default AccountDataProvider;

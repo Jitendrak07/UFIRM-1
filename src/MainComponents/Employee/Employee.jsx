@@ -8,10 +8,10 @@ import swal from "sweetalert";
 import { CreateValidator, ValidateControls } from "./Validation.js";
 import CommonDataProvider from "../../Common/DataProvider/CommonDataProvider.js";
 import DocumentBL from "../../ComponentBL/DocumentBL";
-import {
-  DELETE_CONFIRMATION_MSG,
-  APPROVE_CONFIRMATION_MSG,
-} from "../../Contants/Common";
+// import {
+//   DELETE_CONFIRMATION_MSG,
+//   APPROVE_CONFIRMATION_MSG,
+// } from "../../Contants/Common";
 import DocumentUploader from "../../ReactComponents/FileUploader/DocumentUploader.jsx";
 import { connect } from "react-redux";
 import departmentAction from "../../redux/department/action";
@@ -98,7 +98,7 @@ class Employee extends React.Component {
 
   manageEmployee = (model, type) => {
     this.ApiProviderr.manageEmployee(model, type).then((resp) => {
-      if (resp.ok && resp.status == 200) {
+      if (resp.ok && resp.status === 200) {
         return resp.json().then((rData) => {
           switch (type) {
             case "C":
@@ -184,7 +184,7 @@ class Employee extends React.Component {
 
   findItem(id) {
     return this.state.EmployeeData.find((item) => {
-      if (item.Id == id) {
+      if (item.Id === id) {
         return item;
       }
     });
@@ -230,7 +230,7 @@ class Employee extends React.Component {
   render() {
     return (
       <div>
-        {this.state.PageMode == "Home" && (
+        {this.state.PageMode==="Home" && (
           <div className="row">
             <div className="col-12">
               <div className="card">
@@ -269,7 +269,7 @@ class Employee extends React.Component {
             </div>
           </div>
         )}
-        {(this.state.PageMode == "Add" || this.state.PageMode == "Edit") && (
+        {(this.state.PageMode === "Add" || this.state.PageMode === "Edit") && (
           <div>
             <div>
               <div className="modal-content">
