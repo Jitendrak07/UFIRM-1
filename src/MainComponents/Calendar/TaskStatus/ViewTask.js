@@ -9,7 +9,7 @@ import ApiProvider from "../DataProvider";
 import Button from "../../../ReactComponents/Button/Button";
 import * as appCommon from "../../../Common/AppCommon.js";
 // import { CreateValidator, ValidateControls } from "../Validation";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import swal from "sweetalert";
 import { DELETE_CONFIRMATION_MSG } from '../../../Contants/Common';
 
@@ -49,7 +49,7 @@ export default class ViewTask extends Component {
 
   manageQues = (model, type) => {
     this.ApiProvider.manageQues(model, type).then((resp) => {
-      if (resp.ok && resp.status == 200) {
+      if (resp.ok && resp.status === 200) {
         return resp.json().then((rData) => {
           switch (type) {
             case "C":
@@ -116,7 +116,7 @@ export default class ViewTask extends Component {
     //debugger
     let myhtml = document.createElement("div");
     myhtml.innerHTML = DELETE_CONFIRMATION_MSG + "</hr>";
-    alert: swal({
+    alert(swal({
       buttons: {
         ok: "Yes",
         cancel: "No",
@@ -125,7 +125,8 @@ export default class ViewTask extends Component {
       icon: "warning",
       closeOnClickOutside: false,
       dangerMode: true,
-    }).then((value) => {
+    })
+  ).then((value) => {
       switch (value) {
         case "ok":
           this.setState({ QuesId: QuesId }, () => {

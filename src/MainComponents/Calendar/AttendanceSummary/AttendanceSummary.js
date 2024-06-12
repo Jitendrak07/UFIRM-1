@@ -8,8 +8,8 @@ import ApiProvider from "../DataProvider";
 import * as appCommon from "../../../Common/AppCommon.js";
 import swal from "sweetalert";
 import { DELETE_CONFIRMATION_MSG } from "../../../Contants/Common";
-import { downloadExcel } from "react-export-table-to-excel";
-import { CSVLink } from 'react-csv'
+// import { downloadExcel } from "react-export-table-to-excel";
+// import { CSVLink } from 'react-csv'
 import { bindActionCreators } from "redux";
 import departmentActions from "../../../redux/department/action";
 import { connect } from "react-redux";
@@ -63,7 +63,6 @@ class AttendanceSummary extends Component {
       userIds: "",
       loading: false,
       showAddModal: false,
-      showEditModal: false,
       showEditModal: false,
       PageMode: "Home",
       showQuesModal: false,
@@ -246,11 +245,7 @@ class AttendanceSummary extends Component {
   }
 
   findItem(id) {
-    return this.state.data.find((item) => {
-      if (item.TaskId === id) {
-        return item;
-      }
-    });
+    return this.state.data.find(item => item.TaskId === id);
   }
 
   DateRangeConfig(startDate, endDate) {
@@ -315,7 +310,7 @@ class AttendanceSummary extends Component {
   DeleteTask = (data) => {
     let myhtml = document.createElement("div");
     myhtml.innerHTML = DELETE_CONFIRMATION_MSG + "</hr>";
-    alert: swal({
+    alert( swal({
       buttons: {
         ok: "Yes",
         cancel: "No",
@@ -324,7 +319,8 @@ class AttendanceSummary extends Component {
       icon: "warning",
       closeOnClickOutside: false,
       dangerMode: true,
-    }).then((value) => {
+    })
+     ).then((value) => {
       switch (value) {
         case "ok":
           var type = "D";

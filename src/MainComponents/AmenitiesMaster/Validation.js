@@ -8,20 +8,19 @@ let validateAllControls = [
     { Id: 'txtContact', IsMandatory: true, MaxLength: '100', LabelMessage: 'Contact', Type: "TextBox" },
 ];
 
-    export function CreateValidator() {
-        ValidationProvider.InitializeValidation(validateAllControls);        
+export function CreateValidator() {
+    ValidationProvider.InitializeValidation(validateAllControls);
+}
+
+export function ValidateControls() {
+    const error = ValidateCommon.ValidateControl(validateAllControls);
+    if (error !== '') {
+        AppCommon.ShownotifyError("Please resolve validation errors before submitting.");
+        return false;
+    } else {
+        return true;
     }
-    export function ValidateControls() {
-        let error = '';
-            error = ValidateCommon.ValidateControl(validateAllControls);
-        if (error != '') {
-            AppCommon.ShownotifyError("Please Resolve validation error before submit");
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
+}
 
     
     

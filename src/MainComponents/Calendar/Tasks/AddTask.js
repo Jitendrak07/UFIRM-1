@@ -8,8 +8,8 @@ import moment from "moment";
 import ApiProvider from "../DataProvider";
 import Button from "../../../ReactComponents/Button/Button";
 import * as appCommon from "../../../Common/AppCommon.js";
-import { CreateValidator, ValidateControls } from "../Validation";
-import { ToastContainer, toast } from "react-toastify";
+// import { CreateValidator, ValidateControls } from "../Validation";
+import { ToastContainer} from "react-toastify";
 
 export default class AddTask extends Component {
   constructor(props) {

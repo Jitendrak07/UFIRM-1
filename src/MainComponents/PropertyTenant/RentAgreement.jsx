@@ -9,7 +9,7 @@ import DocumentUploader from '../../ReactComponents/FileUploader/DocumentUploade
 import InputDate from '../NoticeBoard/InputDate';
 
 import { CreateRentAgreementValidator, RentAgreementValidateControls } from './Validation';
-import { VALIDATION_ERROR, DELETE_CONFIRMATION_MSG } from '../../Contants/Common.js';
+import { DELETE_CONFIRMATION_MSG } from '../../Contants/Common.js';
 import { ShowImageModal } from '../KanbanBoard/ImageModal';
 import { ShowPdfModal } from '../KanbanBoard/ShowPdf';
 
@@ -45,7 +45,7 @@ class RentAgreement extends Component {
 
     // textbox value set
     updatetextmodel = (ctrl, val) => {
-        if (ctrl == 'StartDate') {
+        if (ctrl === 'StartDate') {
             if (this.state.endDate) {
                 let sDate = moment(val, "DD/MM/YYYY");  // specified parsed date and format
                 let eDate = moment(this.state.endDate, "DD/MM/YYYY");  // specified parsed date and format
@@ -60,7 +60,7 @@ class RentAgreement extends Component {
                 this.setState({ startDate: val });
             }
         }
-        else if (ctrl == 'EndDate') {
+        else if (ctrl === 'EndDate') {
             if (this.state.startDate) {
                 let sDate = moment(this.state.startDate, "DD/MM/YYYY");  // specified parsed date and format
                 let eDate = moment(val, "DD/MM/YYYY");  // specified parsed date and format
@@ -117,7 +117,7 @@ class RentAgreement extends Component {
     onRemoveRentAgreement(gridId) {
         let myhtml = document.createElement("div");
         myhtml.innerHTML = DELETE_CONFIRMATION_MSG + "</hr>"
-        alert: (
+        alert (
             swal({
                 buttons: { ok: "Yes", cancel: "No", },
                 content: myhtml,

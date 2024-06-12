@@ -28,7 +28,7 @@ export function CreateVehicleValidator() {
 export function VehicleValidateControls() {
     let error = '';
     error = ValidateCommon.ValidateControl(vehicleValidateAllControls);
-    if (error != '') {
+    if (error !== '') {
         AppCommon.ShownotifyError("Please Resolve validation error before add vehicle");
         return false;
     }
@@ -43,7 +43,7 @@ export function CreateFamilyMemberValidator() {
 export function FamilyMemberValidateControls() {
     let error = '';
     error = ValidateCommon.ValidateControl(relationshipValidateAllControls);
-    if (error != '') {
+    if (error !== '') {
         AppCommon.ShownotifyError("Please Resolve validation error before add family member");
         return false;
     }
@@ -58,7 +58,7 @@ export function CreateDocumentTypeValidator() {
 export function DocumentTypeValidateControls() {
     let error = '';
     error = ValidateCommon.ValidateControl(documentsValidateAllControls);
-    if (error != '') {
+    if (error !== '') {
         AppCommon.ShownotifyError("Please Resolve validation error before add document");
         return false;
     }

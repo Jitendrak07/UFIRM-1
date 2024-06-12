@@ -14,11 +14,11 @@ import UrlProvider from "../../Common/ApiUrlProvider.js";
 import ImageUploader from 'react-images-upload';
 import { connect } from 'react-redux';
 import departmentAction from '../../redux/department/action';
-import { promiseWrapper } from '../../utility/common';
+// import { promiseWrapper } from '../../utility/common';
 import { bindActionCreators } from 'redux';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { CreateValidator, ValidateControls, VehicleValidateControls } from '../ManageResidentOwners/Validation.js';
-import { DELETE_CONFIRMATION_MSG, BLOCK_CONFIRMATION_MSG, UNBLOCK_CONFIRMATION_MSG } from '../../Contants/Common';
+import { DELETE_CONFIRMATION_MSG } from '../../Contants/Common';
 import './ManageResidentOwners.css';
 const $ = window.$;
 const documentBL = new DocumentBL();
@@ -108,7 +108,7 @@ class ManageResidentOwners extends React.Component {
 
     componentDidUpdate(nextProps) {
         //documentBL.CreateValidator();
-        if (nextProps.PropertyId != this.props.PropertyId) {
+        if (nextProps.PropertyId !== this.props.PropertyId) {
             switch (this.props.PageName) {
                 case 'Owners':
                     var type = 'O';
@@ -145,7 +145,7 @@ class ManageResidentOwners extends React.Component {
         this.comdbprovider.getRelationshipType(0).then(
             resp => {
                 //
-                if (resp.ok && resp.status == 200) {
+                if (resp.ok && resp.status === 200) {
                     return resp.json().then(rData => {
                         rData = appCommon.changejsoncolumnname(rData, "relationshipTypeId", "Value");
                         rData = appCommon.changejsoncolumnname(rData, "relationship", "Name");
@@ -158,7 +158,7 @@ class ManageResidentOwners extends React.Component {
     getDocumentType() {
         this.comdbprovider.getDocumentType(0).then(
             resp => {
-                if (resp.ok && resp.status == 200) {
+                if (resp.ok && resp.status === 200) {
                     return resp.json().then(rData => {
                         rData = appCommon.changejsoncolumnname(rData, "documentTypeId", "Id");
                         rData = appCommon.changejsoncolumnname(rData, "documentTypeName", "Name");
@@ -175,7 +175,7 @@ class ManageResidentOwners extends React.Component {
     loadPropertyFlat(id) {
         this.comdbprovider.getPropertyFlat(id).then(
             resp => {
-                if (resp.ok && resp.status == 200) {
+                if (resp.ok && resp.status === 200) {
                     return resp.json().then(rData => {
                         rData = appCommon.changejsoncolumnname(rData, "id", "Value");
                         rData = appCommon.changejsoncolumnname(rData, "text", "Name");
@@ -188,7 +188,7 @@ class ManageResidentOwners extends React.Component {
     managePropertyMember = (model, type) => {
         this.ApiProviderr.managePropertyMember(model, type).then(
             resp => {
-                if (resp.ok && resp.status == 200) {
+                if (resp.ok && resp.status === 200) {
                     return resp.json().then(rData => {
                         switch (type) {
                             case 'U':
@@ -200,7 +200,7 @@ class ManageResidentOwners extends React.Component {
                             case 'I':
                                 if (rData) {
                                     let Id = model[0].Id;
-                                    if (model[0].Action == "View") {
+                                    if (model[0].Action === "View") {
                                         this.setState({ PageMode: 'View' }, () => {
 
                                         });
@@ -220,7 +220,7 @@ class ManageResidentOwners extends React.Component {
                                         //swal('Success', 'View information successfully submitted.', 'success');
                                         swal.close();
                                     }
-                                    if (model[0].Action == "Edit") {
+                                    if (model[0].Action === "Edit") {
                                         this.setState({ PageMode: 'Edit' }, () => {
                                             CreateValidator();
                                             documentBL.CreateValidator();
@@ -538,8 +538,8 @@ class ManageResidentOwners extends React.Component {
     }
 
     handleDocSave = () => {
-        if (documentBL.ValidateControls() == "") {
-            let documentTypeName = this.state.documentType.find((item) => { return item.Id == this.state.documentTypeId }).Name;
+        if (documentBL.ValidateControls() === "") {
+            let documentTypeName = this.state.documentType.find((item) => { return item.Id === this.state.documentTypeId }).Name;
             this.setState({ documentType: this.removeByAttr(this.state.documentType, 'Id', this.state.documentTypeId) });
             let gridDocumentData = this.state.gridDocumentData;
             gridDocumentData.push({
@@ -721,11 +721,11 @@ class ManageResidentOwners extends React.Component {
     render() {
         return (
             <div>
-                {this.state.PageMode == 'Home' && 
+                {this.state.PageMode === 'Home' && 
                     <div className="row">
                         <div className="col-12">
                             <div className="card">
-                                {this.props.PageName == 'AllMember' && <div className="card-header d-flex p-0">
+                                {this.props.PageName === 'AllMember' && <div className="card-header d-flex p-0">
                                     <ul className="nav tableFilterContainer">
                                         <li className="nav-item">
                                             <div className="input-group input-group-sm">
@@ -759,7 +759,7 @@ class ManageResidentOwners extends React.Component {
                         </div>
                     </div>
                 }
-                {(this.state.PageMode == 'View' || this.state.PageMode == 'Edit') &&
+                {(this.state.PageMode === 'View' || this.state.PageMode === 'Edit') &&
                     <div>
                         <div>
                             <div className="modal-content">
@@ -768,12 +768,12 @@ class ManageResidentOwners extends React.Component {
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="lblFirstName">First Name</label>
-                                                {this.state.PageMode == "View" &&
+                                                {this.state.PageMode === "View" &&
                                                     <div className="dummyBox">
                                                         {this.state.FirstName}
                                                     </div>
                                                 }
-                                                {this.state.PageMode == "Edit" &&
+                                                {this.state.PageMode === "Edit" &&
                                                     <InputBox Id="txtFirstName"
                                                         Value={this.state.FirstName}
                                                         onChange={this.updateData.bind(this, "FirstName")}
@@ -786,12 +786,12 @@ class ManageResidentOwners extends React.Component {
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="lblMiddleName">Middle Name</label>
-                                                {this.state.PageMode == "View" &&
+                                                {this.state.PageMode === "View" &&
                                                     <div className="dummyBox">
                                                         {this.state.MiddleName}
                                                     </div>
                                                 }
-                                                {this.state.PageMode == "Edit" &&
+                                                {this.state.PageMode === "Edit" &&
                                                     <InputBox Id="txtMiddleName"
                                                         Value={this.state.MiddleName}
                                                         onChange={this.updateData.bind(this, "MiddleName")}
@@ -806,12 +806,12 @@ class ManageResidentOwners extends React.Component {
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="lblLastName">Last Name</label>
-                                                {this.state.PageMode == "View" &&
+                                                {this.state.PageMode === "View" &&
                                                     <div className="dummyBox">
                                                         {this.state.LastName}
                                                     </div>
                                                 }
-                                                {this.state.PageMode == "Edit" &&
+                                                {this.state.PageMode === "Edit" &&
                                                     <InputBox Id="txtLastName"
                                                         Value={this.state.LastName}
                                                         onChange={this.updateData.bind(this, "LastName")}
@@ -852,12 +852,12 @@ class ManageResidentOwners extends React.Component {
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="lblRelationshipType">Resident Type</label>
-                                                {this.state.PageMode == "View" &&
+                                                {this.state.PageMode === "View" &&
                                                     <div className="dummyBox">
                                                         {this.state.ResidentTypeName}
                                                     </div>
                                                 }
-                                                {this.state.PageMode == "Edit" &&
+                                                {this.state.PageMode === "Edit" &&
                                                     <DropDownList Id="ddlRelationshipType"
                                                         onSelected={this.onDropdownChanges.bind(this, "RelationshipType")}
                                                         Options={this.state.RelationshipType} />
@@ -868,7 +868,7 @@ class ManageResidentOwners extends React.Component {
                                     <div className="row">
                                         <div className="col-sm-6">
                                             <div className="form-group">
-                                                {this.state.Showimguploader == true && this.state.PageMode == "Edit" &&
+                                                {this.state.Showimguploader === true && this.state.PageMode === "Edit" &&
                                                     <div className="form-group">
                                                         <label for="lbPictureUpload">Profile Image</label>
                                                         <div style={{ display: "flex" }}>
@@ -892,13 +892,13 @@ class ManageResidentOwners extends React.Component {
                                                     </div>
                                                 }
 
-                                                {this.state.Showimguploader == false &&
+                                                {this.state.Showimguploader === false &&
                                                     <div style={{ marginRight: "15px" }}>
                                                         <img className="ImageView" src={this.state.ProfileImageUrl} style={{ height: "90px" }} />
                                                     </div>
                                                 }
 
-                                                {this.state.Showimguploader == false && this.state.PageMode == "Edit" &&
+                                                {this.state.Showimguploader === false && this.state.PageMode === "Edit" &&
                                                     <Button
                                                         Id="bntShowimage"
                                                         Text="Upload Image"
@@ -906,7 +906,7 @@ class ManageResidentOwners extends React.Component {
                                                         ClassName="btn btn-link" />
                                                 }
 
-                                                {this.state.Showimguploader == true && this.state.PageMode == "Edit" &&
+                                                {this.state.Showimguploader === true && this.state.PageMode === "Edit" &&
                                                     <Button
                                                         Id="bnthideimage"
                                                         Text="Cancel"
@@ -922,7 +922,7 @@ class ManageResidentOwners extends React.Component {
                                                 <h4 class="modal-title">Document Details</h4>
                                             </div>
                                             <div className="modal-body">
-                                                {this.state.PageMode == "Edit" &&
+                                                {this.state.PageMode === "Edit" &&
                                                     <div>
                                                         <div className="row">
                                                             <div className="col-sm-6">
@@ -975,7 +975,7 @@ class ManageResidentOwners extends React.Component {
                                                     </div>}
                                                 <div className="row">
                                                     <div className="col-sm-12">
-                                                        {this.state.PageMode == "View" &&
+                                                        {this.state.PageMode === "View" &&
                                                             <DataGrid
                                                                 Id="grdDocView"
                                                                 IsPagination={false}
@@ -985,7 +985,7 @@ class ManageResidentOwners extends React.Component {
                                                                 GridData={this.state.gridDocumentData}
                                                             />
                                                         }
-                                                        {this.state.PageMode == "Edit" &&
+                                                        {this.state.PageMode === "Edit" &&
                                                             <DataGrid
                                                                 Id="grdDocEdit"
                                                                 IsPagination={false}
@@ -1007,7 +1007,7 @@ class ManageResidentOwners extends React.Component {
                                                 <h4 class="modal-title">Vehicle Details</h4>
                                             </div>
                                             <div className="modal-body">
-                                                {this.state.PageMode == "Edit" &&
+                                                {this.state.PageMode === "Edit" &&
                                                     <div>
                                                         <div className="row">
                                                             <div className="col-sm-6">
@@ -1061,7 +1061,7 @@ class ManageResidentOwners extends React.Component {
                                                     </div>}
                                                 <div className="row">
                                                     <div className="col-sm-12">
-                                                        {this.state.PageMode == "View" &&
+                                                        {this.state.PageMode === "View" &&
                                                             <DataGrid
                                                                 Id="grdVehicleView"
                                                                 IsPagination={false}
@@ -1070,7 +1070,7 @@ class ManageResidentOwners extends React.Component {
                                                                 onGridDeleteMethod={this.onVehicleGridDelete.bind(this)}
                                                             />
                                                         }
-                                                        {this.state.PageMode == "Edit" &&
+                                                        {this.state.PageMode === "Edit" &&
                                                             <DataGrid
                                                                 Id="grdVehicleEdit"
                                                                 IsPagination={false}
@@ -1089,7 +1089,7 @@ class ManageResidentOwners extends React.Component {
                                 </div>
                                 <div className="modal-footer">
                                     {
-                                        this.state.PageMode == "Edit" &&
+                                        this.state.PageMode === "Edit" &&
                                         <Button
                                             Id="btnSave"
                                             Text="Update"

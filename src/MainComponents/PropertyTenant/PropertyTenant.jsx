@@ -7,15 +7,15 @@ import { bindActionCreators } from 'redux';
 
 import * as appCommon from '../../Common/AppCommon';
 import CommonDataProvider from '../../Common/DataProvider/CommonDataProvider.js';
-import UrlProvider from "../../Common/ApiUrlProvider.js";
+// import UrlProvider from "../../Common/ApiUrlProvider.js";
 import ApiProvider from './DataProvider.js';
 
 import departmentActions from '../../redux/department/action';
 
 
 import Button from '../../ReactComponents/Button/Button.jsx';
-import InputBox from '../../ReactComponents/InputBox/InputBox.jsx';
-import SelectBox from '../../ReactComponents/SelectBox/Selectbox.jsx';
+// import InputBox from '../../ReactComponents/InputBox/InputBox.jsx';
+// import SelectBox from '../../ReactComponents/SelectBox/Selectbox.jsx';
 
 
 import TenantBasicDetails from './TenantBasicDetails';
@@ -55,7 +55,7 @@ class PropertyTenant extends Component {
         this.setState({ documentTypedllOptions: [{ Id: 0, Name: "Select Document Type" }] })
         this.comdbprovider.getDocumentType(id).then(
             resp => {
-                if (resp.ok && resp.status == 200) {
+                if (resp.ok && resp.status === 200) {
                     return resp.json().then(rData => {
                         let documentTypeData = [{ Id: 0, Name: "Select Document Type" }];
                         rData.forEach(element => {
@@ -71,7 +71,7 @@ class PropertyTenant extends Component {
         this.setState({ ownerFamilyRelationshipdllOptions: [{ Id: 0, Name: "Select Relationship" }] })
         this.comdbprovider.getRelationshipType(id).then(
             resp => {
-                if (resp.ok && resp.status == 200) {
+                if (resp.ok && resp.status === 200) {
                     return resp.json().then(rData => {
                         let relationshipData = [{ Id: 0, Name: "Select Relationship" }];
                         rData.forEach(element => {
@@ -101,7 +101,7 @@ class PropertyTenant extends Component {
     loadParkingAssignment() {
         this.ApiProviderr.getParkingAssignment(parseInt(this.props.PropertyId)).then(
             resp => {
-                if (resp.ok && resp.status == 200) {
+                if (resp.ok && resp.status === 200) {
                     return resp.json().then(rData => {
                         let data = [];
                         rData.forEach(element => {
@@ -117,7 +117,7 @@ class PropertyTenant extends Component {
     loadEditViewDetails() {
         this.ApiProviderr.getEditViewDetails(this.props.flatId).then(
             resp => {
-                if (resp.ok && resp.status == 200) {
+                if (resp.ok && resp.status === 200) {
                     return resp.json().then(rData => {
                         console.log("existing tenant data", rData);
                         if (rData) {

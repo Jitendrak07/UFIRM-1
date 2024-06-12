@@ -122,7 +122,7 @@ export default class TaskStatusList extends Component {
       loading: false,
       showAddModal: false,
       showEditModal: false,
-      showEditModal: false,
+      
       PageMode: "Home",
       showQuesModal: false,
       showTaskModal: false,

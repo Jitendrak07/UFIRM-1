@@ -16,13 +16,13 @@ const FlatDetails = (props) => {
     const managePropertyMember = (model, type, Id) => {
         ApiProviderr.managePropertyMember(model, type).then(
             resp => {
-                if (resp.ok && resp.status == 200) {
+                if (resp.ok && resp.status === 200) {
                     return resp.json().then(rData => {
                         switch (type) {
                             case 'FD':
                                 setFlatDetails(rData);
                                 break;
-                                break;
+                               
                             default:
                         }
                     });

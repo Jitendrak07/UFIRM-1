@@ -10,7 +10,6 @@ import ApiProvider from '../DataGrid/DataProvider.js';
 const $ = window.$;
 
 //let objcommonjs = new Commonjs();
-let object = new DataGridBL();
 let gridBL = new DataGridBL();
 
 let returnSelectValues = [];
@@ -86,7 +85,7 @@ export default class DataGrid extends React.Component {
         $('.tbl-loading').removeClass('hide');
         let GridarrayMain = new Array();
         let Gridarray = [];
-        if (this.props.GridData != null) {
+        if (this.props.GridData !== null) {
             this.props.GridData.map((val, idx) => {
                 this.props.ColumnCollection.map((cval, cidx) => {
                     Gridarray.splice(cidx, 0, (val[cval.titleValue]));
@@ -94,7 +93,7 @@ export default class DataGrid extends React.Component {
                 const StatusColorColumn = gridBL.GetStatusColorColumn(this.props.ColumnCollection);
                 let statusColorColIndex = null;
                 let statusValue = null;
-                if (StatusColorColumn != null) {
+                if (StatusColorColumn !== null) {
                     statusColorColIndex = StatusColorColumn[0].Index;
                     statusValue = StatusColorColumn[0].Value;
                 }
@@ -102,7 +101,7 @@ export default class DataGrid extends React.Component {
 
                 const StatusColumn = gridBL.GetStatusColumn(this.props.ColumnCollection);
                 let statusColIndex = null;
-                if (StatusColumn != null) {
+                if (StatusColumn !== null) {
                     statusColIndex = StatusColumn[0].Index;
                 }
 
@@ -110,13 +109,13 @@ export default class DataGrid extends React.Component {
                 const SelectButton = gridBL.GetSelectOption(this.props.ColumnCollection);
                 let selectIndex = null;
                 let statusindex = null;
-                if (SelectButton != null) {
+                if (SelectButton !== null) {
                     selectIndex = SelectButton[0].Index;
                     statusindex = SelectButton[0].StatusColumnIndex;
                 }
                 const actionButtons = gridBL.GetActionButton(this.props.ColumnCollection);
                 let actionButtonIndex = null;
-                if (actionButtons != null) {
+                if (actionButtons !== null) {
                     actionButtonIndex = actionButtons[0].Index;
                 }
 
@@ -124,16 +123,16 @@ export default class DataGrid extends React.Component {
                 const SelectImage = gridBL.GetImageIndexForUrl(this.props.ColumnCollection);
                 let iselectIndex = null;
                 let imagePath = null;
-                if (SelectImage != null) {
+                if (SelectImage !== null) {
                     iselectIndex = SelectImage[0].Index;
                     imagePath = SelectImage[0].ImagePath
                 }
-                if (iselectIndex != null) {
+                if (iselectIndex !== null) {
                     Gridarray[iselectIndex] = "<img src=" + val[imagePath] + " class='rounded-circle' alt=" + val.name + " width='35' height='35'/>";
                 }
 
                 const ToggleSwitch = gridBL.GetToggleSwitch(this.props.ColumnCollection);
-                if (ToggleSwitch != null) {
+                if (ToggleSwitch !== null) {
                     ToggleSwitch.forEach(element => {
                         Gridarray[element.Index] = "<input style='width: " + element.Width + "%;border: 0px;background-color: transparent;box-shadow: none;' type='password' value=" + val[element.ToggleSwitch] + " id='" + (element.ToggleSwitch) + "Protection" + Gridarray[0] + "' readonly><span class='showHideButton' value='" + (element.ToggleSwitch) + "'><i class='fa fa-eye' aria-hidden='true'></i></span>";
                     });
@@ -143,14 +142,14 @@ export default class DataGrid extends React.Component {
                 let bselectIndex = null;
                 let isBlocked = null;
                 let isApproved = null;
-                if (IsBlocked != null) {
+                if (IsBlocked !== null) {
                     bselectIndex = IsBlocked[0].Index;
                     isBlocked = IsBlocked[0].IsBlocked;
                     isApproved = IsBlocked[0].IsApproved;
                 }
-                if (bselectIndex != null) {
-                    if (val[isBlocked] == false) {
-                        if (val[isApproved] == true) {
+                if (bselectIndex !== null) {
+                    if (val[isBlocked] === false) {
+                        if (val[isApproved] === true) {
                             Gridarray[bselectIndex] = "Active";
                         } else {
                             Gridarray[bselectIndex] = "Pending";
@@ -164,7 +163,7 @@ export default class DataGrid extends React.Component {
                 //****END******/
 
                 let btnhtml = "";
-                if (actionButtons != undefined) {
+                if (actionButtons !== undefined) {
                     actionButtons.map((action, idx) => {
                         switch (action.Buttons[0]) {
                             case 'Edit&Delete':
@@ -246,36 +245,36 @@ export default class DataGrid extends React.Component {
                     });
                 }
                 //Creating Action button in the grid
-                if (actionButtonIndex != null)
+                if (actionButtonIndex !== null)
                     Gridarray[actionButtonIndex] = btnhtml;
                 //Creating select option in the grid
-                if (selectIndex != null && statusindex == null) {
+                if (selectIndex != null && statusindex === null) {
                     Gridarray[selectIndex] = `<input type="checkbox" value="14">`;
                 }
-                if (selectIndex != null && statusindex != null) {
-                    if (Gridarray[statusindex] == "Expired" || Gridarray[statusindex] == "Deactivated")
+                if (selectIndex !== null && statusindex !== null) {
+                    if (Gridarray[statusindex] === "Expired" || Gridarray[statusindex] === "Deactivated")
                         Gridarray[selectIndex] = `<input type="checkbox" disabled >`;
                     else {
                         Gridarray[selectIndex] = `<input type="checkbox" value="14">`;
                     }
                 }
                 //Status column class mapping
-                if (statusColIndex != null) {
+                if (statusColIndex !== null) {
                     Gridarray[statusColIndex] = `<span class=${Gridarray[statusColIndex].toLowerCase()}>${Gridarray[statusColIndex]}</span>`;
                 }
-                if (statusColorColIndex != null) {
+                if (statusColorColIndex !== null) {
                     Gridarray[statusColorColIndex] = `<span>${val[statusValue]}</span>`;
                     // added by sanjay  jan 04 22
-                    if(StatusColorColumn[0].Value=='color'){
+                    if(StatusColorColumn[0].Value ==='color'){
                         Gridarray[statusColorColIndex] = `<span style="background-color:${val[statusValue]}">${val[statusValue]}</span>`;
                     }
-                    if (val[statusValue] == "Vacant") {
+                    if (val[statusValue] === "Vacant") {
                         Gridarray[statusColorColIndex] = `<span class='setStatusbox btn-success'>${val[statusValue]}</span>`;
                     }
-                    if (val[statusValue] == "Tenant Residing") {
+                    if (val[statusValue] === "Tenant Residing") {
                         Gridarray[statusColorColIndex] = `<span class='setStatusbox btn-warning'>${val[statusValue]}</span>`;
                     }
-                    if (val[statusValue] == "Owner Residing") {
+                    if (val[statusValue] === "Owner Residing") {
                         Gridarray[statusColorColIndex] = `<span class='setStatusbox btn-danger'>${val[statusValue]}</span>`;
                     }
                 }
@@ -310,14 +309,14 @@ export default class DataGrid extends React.Component {
          
         //Enable hide column property
         dr.map((item, index) => {
-            if (item.visible != undefined && item.visible) {
+            if (item.visible !== undefined && item.visible) {
                 table.column(index).visible(false);
             }
         });
 
 
 
-        if (this.props.GridData != null) {
+        if (this.props.GridData !== null) {
 
             $(`#${this.props.Id} tbody`).unbind("click");
             // EDIT ACTION
@@ -414,9 +413,9 @@ export default class DataGrid extends React.Component {
                     let deleteIndex = undefined;
                     let searchjson = returnSelectValues.find((item, idx) => {
                         deleteIndex = idx;
-                        return item.Value == returnVale
+                        return item.Value = returnVale
                     });
-                    if (deleteIndex != undefined) {
+                    if (deleteIndex !== undefined) {
                         returnSelectValues.splice(deleteIndex, 1);
                     }
                 }
@@ -485,7 +484,7 @@ export default class DataGrid extends React.Component {
                 }];
                 _this.ApiProviderr.manageDataGrid(model).then(
                     resp => {
-                        if (resp.ok && resp.status == 200) {
+                        if (resp.ok && resp.status === 200) {
                             return resp.json().then(rData => {
                                 if (rData) {
                                     x.type = "text";
